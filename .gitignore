@@ -1,0 +1,29 @@
+﻿# Go build outputs
+*.exe
+*.dll
+*.so
+*.dylib
+/bin/
+/dist/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Test outputs
+*.test
+coverage.out
+coverage.html
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
