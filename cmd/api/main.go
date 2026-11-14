@@ -1,26 +1,21 @@
 package main
 
 import (
-    "net/http"
+	"log"
 
-    "github.com/gin-gonic/gin"
+	"example.com/issuepilot/internal/config"
+	"example.com/issuepilot/internal/router"
 )
 
 func main() {
-    r := gin.Default()
+	// 获取服务端口
+	port := config.GetPort()
 
-    r.GET("/api/v1/health", func(c *gin.Context) {
-        c.JSON(http.StatusOK, gin.H{
-            "code":    200,
-            "message": "ok",
-            "data": gin.H{
-                "service": "issuepilot",
-                "status":  "healthy",
-            },
-        })
-    })
+	// 初始化路由
+	r := router.SetupRouter()
 
-    if err := r.Run(":8080"); err != nil {
-        panic(err)
-    }
+	// 启动 HTTP 服务
+	if err := r.Run(":" + port); err != nil {
+		log.Fatalf("failed to start server: %v", err)
+	}
 }
